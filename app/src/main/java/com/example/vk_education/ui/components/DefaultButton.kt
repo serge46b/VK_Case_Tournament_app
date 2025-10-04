@@ -27,7 +27,7 @@ fun DefaultButton(
         modifier = Modifier
             .padding(horizontal = 12.dp, vertical = 12.dp)
             .let { if (width != null) it.width(width.dp) else it },
-        shape = RoundedCornerShape(12.dp),
+        shape = RoundedCornerShape(8.dp),
         colors = ButtonDefaults.buttonColors(
             containerColor = backgroundColor
         )
