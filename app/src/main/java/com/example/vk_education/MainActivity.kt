@@ -40,6 +40,7 @@ private fun App (){
                 Row {
                     Button(onClick = {currentPage = Home}) { Text("1")}
                     Button(onClick = {currentPage = Application }) { Text("2")}
+                    Button(onClick = {currentPage = Onboarding }) { Text("3")}
                 }
             }) { innerPadding ->
             Box(Modifier.padding(innerPadding)) {
