@@ -19,7 +19,7 @@ import androidx.compose.ui.unit.sp
 fun DefaultButton(
     onClick: () -> Unit,
     text: String,
-    backgroundColor: Color = Color(0xFF0077FF),
+    backgroundColor: Color = Color.Blue,
     width: Int? = null
 ) {
     Button(

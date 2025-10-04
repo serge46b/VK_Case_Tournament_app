@@ -15,7 +15,6 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.vk_education.R
 import com.example.vk_education.ui.components.AppCardVertical
-import com.example.vk_education.ui.components.SearchBar
 
 
 @Composable

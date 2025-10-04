@@ -63,7 +63,7 @@ fun AppCardVertical(
                 fontWeight = FontWeight.Normal,
                 fontSize = 8.sp,
                 textAlign = TextAlign.Left,
-                color = Color(0xFF282828),
+                color = Color.Black,
                 maxLines = 2
             )
         }
@@ -75,7 +75,6 @@ fun AppCardVertical(
 fun AppCardVerticalPreview() {
     Box(
         modifier = Modifier
-            .fillMaxSize()
             .background(Color.Black)
     ) {
         AppCardVertical(
