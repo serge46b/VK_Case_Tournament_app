@@ -1,13 +1,55 @@
 package com.example.vk_education.ui.pages.home
 
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.vk_education.ui.viewmodels.AppsPreviewListViewModel
 
 
 @Composable
 fun HomePage(){
-    Text("Hiiiiii~", Modifier.padding(10.dp, 10.dp))
+    val viewModel: AppsPreviewListViewModel = viewModel()
+    val appsPreviewList = viewModel.appsPreviewList.value
+    val appsCategoriesList = viewModel.categoryList.value
+    if (viewModel.isLoading) Text("Loading.......")
+    if (viewModel.error != null) Text(viewModel.error!!)
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Button(onClick = { viewModel.fetchAppPreviews() }) {
+            Text("Update previews")
+        }
+        for (cat in appsCategoriesList) {
+            Column(
+                modifier = Modifier
+                    .padding(16.dp)
+                    .fillMaxWidth(),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text(cat.name, modifier = Modifier.align(Alignment.Start))
+                for (cap in appsPreviewList.filter { ap -> ap.categoryId == cat.id }) {
+                    Text(
+                        cap.name,
+                        modifier = Modifier.align(Alignment.End),
+                        color = Color.Red
+                    )
+                }
+            }
+        }
+    }
 }
