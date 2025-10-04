@@ -1,6 +1,5 @@
 package com.example.vk_education.ui.components
 
-import android.R
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable

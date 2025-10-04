@@ -60,7 +60,8 @@ fun OnboardingPage(modifier: Modifier = Modifier) {
             DefaultButton(
                 onClick = { /* TODO: Add action */ },
                 text = "Продолжить",
-                width = 200
+                width = 200,
+                height = 48
             )
         }
     }

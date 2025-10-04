@@ -1,5 +1,6 @@
 package com.example.vk_education.ui.components
 
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -19,14 +20,17 @@ import androidx.compose.ui.unit.sp
 fun DefaultButton(
     onClick: () -> Unit,
     text: String,
+    width: Int,
+    height: Int,
     backgroundColor: Color = Color.Blue,
-    width: Int? = null
+    textColor: Color = Color.White,
+    fontSize: Int? = null
 ) {
     Button(
         onClick = onClick,
         modifier = Modifier
-            .padding(horizontal = 12.dp, vertical = 12.dp)
-            .let { if (width != null) it.width(width.dp) else it },
+            .width(width.dp)
+            .height(height.dp),
         shape = RoundedCornerShape(8.dp),
         colors = ButtonDefaults.buttonColors(
             containerColor = backgroundColor
@@ -36,9 +40,9 @@ fun DefaultButton(
             text = text,
             fontFamily = FontFamily.Default,
             fontWeight = FontWeight.Normal,
-            fontSize = 14.sp,
-            textAlign = TextAlign.Center,
-            color = Color.White
+            fontSize = if (fontSize != null) fontSize.sp else 14.sp,
+            color = textColor,
+            textAlign = TextAlign.Center
         )
     }
 }
