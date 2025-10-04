@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -43,7 +44,7 @@ fun AppCardBig(
 ) {
     Box(
         modifier = modifier
-            .width(345.dp)
+            .fillMaxWidth()
             .height(224.dp)
             .clip(RoundedCornerShape(8.dp))
             .clickable { onClick() }
@@ -53,7 +54,7 @@ fun AppCardBig(
                 painter = painterResource(id = appHeader),
                 contentDescription = "Header Image",
                 modifier = Modifier
-                    .width(345.dp)
+                    .fillMaxWidth()
                     .height(168.dp)
                     .clip(RoundedCornerShape(
                         topStart = 8.dp, topEnd = 8.dp,
