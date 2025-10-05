@@ -15,6 +15,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.vk_education.ui.components.AppCardBig
 import com.example.vk_education.ui.components.CategoryList
 import com.example.vk_education.ui.viewmodels.AppsPreviewListViewModel
 
@@ -41,6 +42,8 @@ fun HomePage(){
             .padding(16.dp),
         verticalArrangement = Arrangement.spacedBy(24.dp)
     ) {
+        AppCardBig("VK мессенджер", "VK", )
+//        TODO: Add featured apps
         for (cat in appsCategoriesList) {
             CategoryList(
                 title = cat.name,

@@ -30,13 +30,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.AsyncImage
 
 @Composable
 fun AppCardBig(
     appName: String,
     publisher: String,
-    appIcon: Int,
-    appHeader: Int,
+    appIcon: String,
+    appHeader: String,
     rating: Float,
     ageRating: Int,
     onClick: () -> Unit,
@@ -50,15 +51,17 @@ fun AppCardBig(
             .clickable { onClick() }
     ) {
         Column {
-            Image(
-                painter = painterResource(id = appHeader),
+            AsyncImage(
+                model = appHeader,
                 contentDescription = "Header Image",
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(168.dp)
-                    .clip(RoundedCornerShape(
-                        topStart = 8.dp, topEnd = 8.dp,
-                        bottomStart = 0.dp, bottomEnd = 0.dp)
+                    .clip(
+                        RoundedCornerShape(
+                            topStart = 8.dp, topEnd = 8.dp,
+                            bottomStart = 0.dp, bottomEnd = 0.dp
+                        )
                     )
             )
 
@@ -66,14 +69,16 @@ fun AppCardBig(
                 modifier = Modifier
                     .fillMaxSize()
                     .padding(horizontal = 8.dp)
-                    .clip(RoundedCornerShape(
-                        topStart = 0.dp, topEnd = 0.dp,
-                        bottomStart = 8.dp, bottomEnd = 8.dp)
+                    .clip(
+                        RoundedCornerShape(
+                            topStart = 0.dp, topEnd = 0.dp,
+                            bottomStart = 8.dp, bottomEnd = 8.dp
+                        )
                     ),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                Image(
-                    painter = painterResource(id = appIcon),
+                AsyncImage(
+                    model = appIcon,
                     contentDescription = appName,
                     modifier = Modifier
                         .size(40.dp)
@@ -93,7 +98,7 @@ fun AppCardBig(
                         color = Color.Black,
                         maxLines = 1
                     )
-                    
+
                     Spacer(modifier = Modifier.height(2.dp))
 
                     Text(
@@ -129,9 +134,9 @@ fun AppCardBig(
                                 maxLines = 1
                             )
                         }
-                        
+
                         Spacer(modifier = Modifier.width(4.dp))
-                        
+
                         // Vertical bar separator
                         Text(
                             text = "|",
@@ -139,7 +144,7 @@ fun AppCardBig(
                             color = Color(0xFFD9D9D9),
                             fontWeight = FontWeight.Normal
                         )
-                        
+
                         Spacer(modifier = Modifier.width(4.dp))
 
                         Text(
@@ -151,7 +156,7 @@ fun AppCardBig(
                         )
                     }
                 }
-                
+
                 // Download Button
                 DefaultButton(
                     onClick = { /* Download action */ },
@@ -176,8 +181,8 @@ fun AppCardBigPreview() {
     ) {
         AppCardBig(
             appName = "Название приложения",
-            appIcon = android.R.drawable.ic_dialog_info,
-            appHeader = android.R.drawable.ic_dialog_info,
+            appIcon = "",
+            appHeader = "",
             publisher = "Разработчик",
             rating = 4.8F,
             ageRating = 6,
