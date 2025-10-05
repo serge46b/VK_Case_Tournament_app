@@ -1,7 +1,9 @@
 package com.example.vk_education.ui.components
 
+import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -31,6 +33,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
+import com.example.vk_education.data.ApiClient
 
 @Composable
 fun AppCardBig(
@@ -38,8 +41,8 @@ fun AppCardBig(
     publisher: String,
     appIcon: String,
     appHeader: String,
-    rating: Float,
-    ageRating: Int,
+    rating: Double,
+    ageRating: String,
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -49,14 +52,14 @@ fun AppCardBig(
             .height(224.dp)
             .clip(RoundedCornerShape(8.dp))
             .clickable { onClick() }
+            .border(BorderStroke(2.dp, Color(0xFFF1F1F1)), shape = RoundedCornerShape(8.dp))
     ) {
         Column {
             AsyncImage(
-                model = appHeader,
+                model = ApiClient.DOMAIN + appHeader,
                 contentDescription = "Header Image",
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(168.dp)
                     .clip(
                         RoundedCornerShape(
                             topStart = 8.dp, topEnd = 8.dp,
@@ -78,7 +81,7 @@ fun AppCardBig(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 AsyncImage(
-                    model = appIcon,
+                    model = ApiClient.DOMAIN + appIcon,
                     contentDescription = appName,
                     modifier = Modifier
                         .size(40.dp)
@@ -86,7 +89,7 @@ fun AppCardBig(
                 )
                 Spacer(modifier = Modifier.width(12.dp))
                 Column(
-                    modifier = Modifier.weight(1f),
+                    modifier = Modifier.weight(1f).padding(4.dp),
                     verticalArrangement = Arrangement.Center
                 ) {
                     // App Name (Roboto Medium 10)
@@ -99,8 +102,6 @@ fun AppCardBig(
                         maxLines = 1
                     )
 
-                    Spacer(modifier = Modifier.height(2.dp))
-
                     Text(
                         text = publisher,
                         fontFamily = FontFamily.Default,
@@ -109,8 +110,6 @@ fun AppCardBig(
                         color = Color.Gray,
                         maxLines = 1
                     )
-
-                    Spacer(modifier = Modifier.height(4.dp))
 
                     Row(
                         verticalAlignment = Alignment.CenterVertically
@@ -148,7 +147,7 @@ fun AppCardBig(
                         Spacer(modifier = Modifier.width(4.dp))
 
                         Text(
-                            text = "${ageRating}+",
+                            text = ageRating,
                             fontFamily = FontFamily.Default,
                             fontWeight = FontWeight.Light,
                             fontSize = 8.sp,
@@ -184,8 +183,8 @@ fun AppCardBigPreview() {
             appIcon = "",
             appHeader = "",
             publisher = "Разработчик",
-            rating = 4.8F,
-            ageRating = 6,
+            rating = 4.99,
+            ageRating = "6+",
             onClick = { /* Preview action */ }
         )
     }

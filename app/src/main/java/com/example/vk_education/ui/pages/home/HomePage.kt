@@ -21,33 +21,42 @@ import com.example.vk_education.ui.viewmodels.AppsPreviewListViewModel
 
 
 @Composable
-fun HomePage(){
+fun HomePage(onAppClick: (Int)->Unit) {
     val viewModel: AppsPreviewListViewModel = viewModel()
     val appsPreviewList = viewModel.appsPreviewList.value
     val appsCategoriesList = viewModel.categoryList.value
-    
+    val topData = appsPreviewList.find { ap -> ap.id == 1 }
+
     if (viewModel.isLoading) {
         Text("Loading.......")
         return
     }
-    
+
     if (viewModel.error != null) {
         Text(viewModel.error!!)
         return
     }
-    
+
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(16.dp),
+            .padding(24.dp).padding(top=50.dp),
         verticalArrangement = Arrangement.spacedBy(24.dp)
     ) {
-        AppCardBig("VK мессенджер", "VK", )
+        if (topData != null) AppCardBig(
+            topData.name,
+            topData.company,
+            topData.iconUrl,
+            topData.headerImageUrl,
+            topData.rating,
+            topData.ageRating,
+            onClick = {onAppClick(topData.id)})
 //        TODO: Add featured apps
         for (cat in appsCategoriesList) {
             CategoryList(
                 title = cat.name,
-                appPreviewList = appsPreviewList.filter { ap -> ap.categoryId == cat.id }
+                appPreviewList = appsPreviewList.filter { ap -> ap.categoryId == cat.id },
+                onAppClick
             )
         }
     }

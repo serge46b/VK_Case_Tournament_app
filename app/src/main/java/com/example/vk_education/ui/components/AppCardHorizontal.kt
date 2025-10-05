@@ -32,7 +32,7 @@ fun AppCardHorizontal(
     appName: String,
     appDescription: String,
     appIcon: Int,
-    rating: Float,
+    rating: Double,
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -118,7 +118,7 @@ fun AppCardHorizontalPreview() {
             appName = "Название приложения",
             appDescription = "Краткое описание приложения",
             appIcon = android.R.drawable.ic_dialog_info,
-            rating = 4.8F,
+            rating = 4.8,
             onClick = { /* Preview action */ }
         )
     }

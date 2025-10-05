@@ -29,11 +29,11 @@ import com.example.vk_education.data.models.AppPreview
 @Composable
 fun CategoryList(
     title: String,
-    appPreviewList: List<AppPreview>) {
+    appPreviewList: List<AppPreview>,
+    onAppClick: (id:Int)->Unit) {
     Column(
         modifier = Modifier
-            .fillMaxWidth()
-            .padding(horizontal = 24.dp),
+            .fillMaxWidth(),
         horizontalAlignment = Alignment.Start
     ){
         Text(
@@ -63,7 +63,7 @@ fun CategoryList(
                             appDescription = cap.shortDescription,
                             appIcon = android.R.drawable.ic_dialog_info, // Using default icon for now
                             rating = cap.rating,
-                            onClick = { /* Handle click */ }
+                            onClick = { onAppClick(cap.id) }
                         )
                     }
                 }
@@ -73,80 +73,80 @@ fun CategoryList(
 
 }
 
-@Preview
-@Composable
-fun CategoryListPreview(){
-    // Create sample data for preview
-    val sampleApps = listOf(
-        AppPreview(
-            id = 1,
-            name = "Sample App 1",
-            shortDescription = "Description 1",
-            iconUrl = "",
-            headerImageUrl = "",
-            categoryId = 1,
-            ageRating = "6+",
-            rating = 4.5f
-        ),
-        AppPreview(
-            id = 2,
-            name = "Sample App 2", 
-            shortDescription = "Description 2",
-            iconUrl = "",
-            headerImageUrl = "",
-            categoryId = 1,
-            ageRating = "12+",
-            rating = 4.2f
-        ),
-        AppPreview(
-            id = 3,
-            name = "Sample App 3", 
-            shortDescription = "Description 3",
-            iconUrl = "",
-            headerImageUrl = "",
-            categoryId = 1,
-            ageRating = "18+",
-            rating = 4.8f
-        ),
-        AppPreview(
-            id = 4,
-            name = "Sample App 4", 
-            shortDescription = "Description 4",
-            iconUrl = "",
-            headerImageUrl = "",
-            categoryId = 1,
-            ageRating = "3+",
-            rating = 4.1f
-        ),
-        AppPreview(
-            id = 5,
-            name = "Sample App 5", 
-            shortDescription = "Description 5",
-            iconUrl = "",
-            headerImageUrl = "",
-            categoryId = 1,
-            ageRating = "6+",
-            rating = 4.6f
-        ),
-        AppPreview(
-            id = 6,
-            name = "Sample App 6", 
-            shortDescription = "Description 6",
-            iconUrl = "",
-            headerImageUrl = "",
-            categoryId = 1,
-            ageRating = "9+",
-            rating = 4.3f
-        )
-    )
-    
-    Box(
-        modifier = Modifier
-            .background(Color.White)
-    ) {
-        CategoryList(
-            title = "Название категории", 
-            appPreviewList = sampleApps
-        )
-    }
-}
+//@Preview
+//@Composable
+//fun CategoryListPreview(){
+//    // Create sample data for preview
+//    val sampleApps = listOf(
+//        AppPreview(
+//            id = 1,
+//            name = "Sample App 1",
+//            shortDescription = "Description 1",
+//            iconUrl = "",
+//            headerImageUrl = "",
+//            categoryId = 1,
+//            ageRating = "6+",
+//            rating = 4.5
+//        ),
+//        AppPreview(
+//            id = 2,
+//            name = "Sample App 2",
+//            shortDescription = "Description 2",
+//            iconUrl = "",
+//            headerImageUrl = "",
+//            categoryId = 1,
+//            ageRating = "12+",
+//            rating = 4.2
+//        ),
+//        AppPreview(
+//            id = 3,
+//            name = "Sample App 3",
+//            shortDescription = "Description 3",
+//            iconUrl = "",
+//            headerImageUrl = "",
+//            categoryId = 1,
+//            ageRating = "18+",
+//            rating = 4.8
+//        ),
+//        AppPreview(
+//            id = 4,
+//            name = "Sample App 4",
+//            shortDescription = "Description 4",
+//            iconUrl = "",
+//            headerImageUrl = "",
+//            categoryId = 1,
+//            ageRating = "3+",
+//            rating = 4.1
+//        ),
+//        AppPreview(
+//            id = 5,
+//            name = "Sample App 5",
+//            shortDescription = "Description 5",
+//            iconUrl = "",
+//            headerImageUrl = "",
+//            categoryId = 1,
+//            ageRating = "6+",
+//            rating = 4.6
+//        ),
+//        AppPreview(
+//            id = 6,
+//            name = "Sample App 6",
+//            shortDescription = "Description 6",
+//            iconUrl = "",
+//            headerImageUrl = "",
+//            categoryId = 1,
+//            ageRating = "9+",
+//            rating = 4.3
+//        )
+//    )
+//
+//    Box(
+//        modifier = Modifier
+//            .background(Color.White)
+//    ) {
+//        CategoryList(
+//            title = "Название категории",
+//            appPreviewList = sampleApps
+//        )
+//    }
+//}
