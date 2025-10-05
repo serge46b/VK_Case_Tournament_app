@@ -26,12 +26,14 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.AsyncImage
+import com.example.vk_education.data.ApiClient
 
 @Composable
 fun AppCardHorizontal(
     appName: String,
     appDescription: String,
-    appIcon: Int,
+    appIcon: String,
     rating: Double,
     onClick: () -> Unit,
     modifier: Modifier = Modifier
@@ -49,8 +51,8 @@ fun AppCardHorizontal(
             verticalAlignment = Alignment.CenterVertically
         ) {
             // App Icon
-            Image(
-                painter = painterResource(id = appIcon),
+            AsyncImage(
+                model= ApiClient.DOMAIN + appIcon,
                 contentDescription = appName,
                 modifier = Modifier
                     .size(64.dp)
@@ -107,19 +109,19 @@ fun AppCardHorizontal(
     }
 }
 
-@Preview(showBackground = true)
-@Composable
-fun AppCardHorizontalPreview() {
-    Box(
-        modifier = Modifier
-            .background(Color.White)
-    ) {
-        AppCardHorizontal(
-            appName = "Название приложения",
-            appDescription = "Краткое описание приложения",
-            appIcon = android.R.drawable.ic_dialog_info,
-            rating = 4.8,
-            onClick = { /* Preview action */ }
-        )
-    }
-}
+//@Preview(showBackground = true)
+//@Composable
+//fun AppCardHorizontalPreview() {
+//    Box(
+//        modifier = Modifier
+//            .background(Color.White)
+//    ) {
+//        AppCardHorizontal(
+//            appName = "Название приложения",
+//            appDescription = "Краткое описание приложения",
+//            appIcon = android.R.drawable.ic_dialog_info,
+//            rating = 4.8,
+//            onClick = { /* Preview action */ }
+//        )
+//    }
+//}

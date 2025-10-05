@@ -61,7 +61,7 @@ fun CategoryList(
                         AppCardHorizontal(
                             appName = cap.name,
                             appDescription = cap.shortDescription,
-                            appIcon = android.R.drawable.ic_dialog_info, // Using default icon for now
+                            appIcon = cap.iconUrl, // Using default icon for now
                             rating = cap.rating,
                             onClick = { onAppClick(cap.id) }
                         )
