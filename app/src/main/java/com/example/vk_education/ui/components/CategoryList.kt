@@ -30,7 +30,8 @@ import com.example.vk_education.data.models.AppPreview
 fun CategoryList(
     title: String,
     appPreviewList: List<AppPreview>,
-    onAppClick: (id:Int)->Unit) {
+    onAppClick: (Int) -> Unit = {}
+) {
     Column(
         modifier = Modifier
             .fillMaxWidth(),
@@ -40,7 +41,7 @@ fun CategoryList(
             text = title,
             fontFamily = FontFamily.Default,
             fontWeight = FontWeight.Medium,
-            fontSize = 16.sp,
+            fontSize = 18.sp,
             color = Color.Black,
             maxLines = 1
         )

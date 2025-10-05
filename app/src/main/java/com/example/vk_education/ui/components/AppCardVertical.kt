@@ -25,11 +25,14 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.AsyncImage
+import com.example.vk_education.data.ApiClient
+
 
 @Composable
 fun AppCardVertical(
     appName: String,
-    appIcon: Int,
+    appIcon: String,
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -49,8 +52,8 @@ fun AppCardVertical(
             modifier = Modifier
                 .fillMaxSize(),
         ) {
-            Image(
-                painter = painterResource(id = appIcon),
+            AsyncImage(
+                model = ApiClient.DOMAIN + appIcon,
                 contentDescription = appName,
                 modifier = Modifier
                     .size(80.dp)
@@ -61,7 +64,7 @@ fun AppCardVertical(
                 text = appName,
                 fontFamily = FontFamily.Default,
                 fontWeight = FontWeight.Normal,
-                fontSize = 8.sp,
+                fontSize = 10.sp,
                 textAlign = TextAlign.Left,
                 color = Color.Black,
                 maxLines = 2
@@ -69,18 +72,18 @@ fun AppCardVertical(
         }
     }
 }
-
-@Preview(showBackground = true)
-@Composable
-fun AppCardVerticalPreview() {
-    Box(
-        modifier = Modifier
-            .background(Color.Black)
-    ) {
-        AppCardVertical(
-            appName = "Название приложения",
-            appIcon = android.R.drawable.ic_dialog_info,
-            onClick = { /* Preview action */ }
-        )
-    }
-}
+//
+//@Preview(showBackground = true)
+//@Composable
+//fun AppCardVerticalPreview() {
+//    Box(
+//        modifier = Modifier
+//            .background(Color.Black)
+//    ) {
+//        AppCardVertical(
+//            appName = "Название приложения",
+//            appIcon = android.R.drawable.ic_dialog_info,
+//            onClick = { /* Preview action */ }
+//        )
+//    }
+//}

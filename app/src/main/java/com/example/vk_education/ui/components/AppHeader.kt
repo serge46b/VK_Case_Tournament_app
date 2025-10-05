@@ -2,13 +2,11 @@ package com.example.vk_education.ui.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
@@ -22,31 +20,30 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.material3.Text
-import androidx.compose.ui.layout.ModifierLocalBeyondBoundsLayout
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.example.vk_education.ui.components.DefaultButton
+import coil.compose.AsyncImage
+import com.example.vk_education.data.ApiClient
 
 @Composable
 fun AppHeader(
     appName: String,
     publisher: String,
-    appIcon: Int,
-    appHeader: Int,
-    rating: Float,
-    ageRating: Int,
+    appIcon: String,
+    appHeader: String,
+    rating: Double,
+    ageRating: String,
     downloads: String,
-    size: Float,
+    size: Double,
     onClick: () -> Unit,
     modifier: Modifier = Modifier
 ){
     Box {
         // App Header Image (full width, responsive height)
-        Image(
-            painter = painterResource(id = appHeader),
+        AsyncImage(
+            model = ApiClient.DOMAIN + appHeader,
             contentDescription = "App Header",
             modifier = Modifier
                 .fillMaxWidth()
@@ -65,19 +62,21 @@ fun AppHeader(
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(horizontal = 8.dp)
+                    .height(80.dp)
+                    .clip(RoundedCornerShape(8.dp))
                     .background(Color.White)
-                    .height(80.dp),
+                    .padding(8.dp),
+
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 // App Icon - positioned to overlay header by half
-                Image(
-                    painter = painterResource(id = appIcon),
+                AsyncImage(
+                    model = ApiClient.DOMAIN + appIcon,
                     contentDescription = appName,
                     modifier = Modifier
                         .size(72.dp)
                         .clip(RoundedCornerShape(8.dp))
-                        //.background(Color.Blue)
+                        //.background(Color.Blue
                 )
                 
                 Spacer(modifier = Modifier.width(8.dp))
@@ -93,7 +92,7 @@ fun AppHeader(
                         text = appName,
                         fontFamily = FontFamily.Default,
                         fontWeight = FontWeight.Medium,
-                        fontSize = 16.sp,
+                        fontSize = 18.sp,
                         color = Color.Black,
                         maxLines = 1
                     )
@@ -105,7 +104,7 @@ fun AppHeader(
                         text = publisher,
                         fontFamily = FontFamily.Default,
                         fontWeight = FontWeight.Light,
-                        fontSize = 12.sp,
+                        fontSize = 14.sp,
                         color = Color.Gray,
                         maxLines = 1
                     )
@@ -149,7 +148,7 @@ fun AppHeader(
                         text = rating.toString(),
                         fontFamily = FontFamily.Default,
                         fontWeight = FontWeight.Light,
-                        fontSize = 12.sp,
+                        fontSize = 14.sp,
                         color = Color.Black,
                         maxLines = 1
                     )
@@ -160,7 +159,7 @@ fun AppHeader(
                 // Divider
                 Text(
                     text = "|",
-                    fontSize = 12.sp,
+                    fontSize = 14.sp,
                     color = Color(0xFFD9D9D9),
                     fontWeight = FontWeight.Normal
                 )
@@ -169,10 +168,10 @@ fun AppHeader(
                 
                 // Age Rating
                 Text(
-                    text = "${ageRating}+",
+                    text = ageRating,
                     fontFamily = FontFamily.Default,
                     fontWeight = FontWeight.Light,
-                    fontSize = 12.sp,
+                    fontSize = 14.sp,
                     color = Color.Black
                 )
 
@@ -181,7 +180,7 @@ fun AppHeader(
                 // Divider
                 Text(
                     text = "|",
-                    fontSize = 12.sp,
+                    fontSize = 14.sp,
                     color = Color(0xFFD9D9D9),
                     fontWeight = FontWeight.Normal
                 )
@@ -192,7 +191,7 @@ fun AppHeader(
                     text = "${size} МБ",
                     fontFamily = FontFamily.Default,
                     fontWeight = FontWeight.Light,
-                    fontSize = 12.sp,
+                    fontSize = 14.sp,
                     color = Color.Black
                 )
 
@@ -201,7 +200,7 @@ fun AppHeader(
                 // Divider
                 Text(
                     text = "|",
-                    fontSize = 12.sp,
+                    fontSize = 14.sp,
                     color = Color(0xFFD9D9D9),
                     fontWeight = FontWeight.Normal
                 )
@@ -212,7 +211,7 @@ fun AppHeader(
                     text = downloads,
                     fontFamily = FontFamily.Default,
                     fontWeight = FontWeight.Light,
-                    fontSize = 12.sp,
+                    fontSize = 14.sp,
                     color = Color.Black
                 )
             }
@@ -220,23 +219,23 @@ fun AppHeader(
     }
 }
 
-@Preview
-@Composable
-fun AppHeaderPreview(){
-    Box(
-        modifier = Modifier
-            .background(Color.White)
-    ) {
-        AppHeader(
-            appName = "Название приложения",
-            publisher = "Разработчик",
-            appIcon = android.R.drawable.ic_dialog_info,
-            appHeader = android.R.drawable.ic_dialog_info,
-            rating = 4.8F,
-            ageRating = 6,
-            downloads = "1M+",
-            size = 25.5F,
-            onClick = { /* Preview action */ }
-        )
-    }
-}
+//@Preview
+//@Composable
+//fun AppHeaderPreview(){
+//    Box(
+//        modifier = Modifier
+//            .background(Color.White)
+//    ) {
+//        AppHeader(
+//            appName = "Название приложения",
+//            publisher = "Разработчик",
+//            appIcon = android.R.drawable.ic_dialog_info,
+//            appHeader = android.R.drawable.ic_dialog_info,
+//            rating = 4.8F,
+//            ageRating = 6,
+//            downloads = "1M+",
+//            size = 25.5F,
+//            onClick = { /* Preview action */ }
+//        )
+//    }
+//}

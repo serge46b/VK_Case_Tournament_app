@@ -58,7 +58,7 @@ fun HomePage(onAppClick: (Int)->Unit) {
             CategoryList(
                 title = cat.name,
                 appPreviewList = appsPreviewList.filter { ap -> ap.categoryId == cat.id },
-                onAppClick
+                onAppClick = onAppClick
             )
         }
     }

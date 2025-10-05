@@ -40,7 +40,7 @@ fun DefaultButton(
             text = text,
             fontFamily = FontFamily.Default,
             fontWeight = FontWeight.Normal,
-            fontSize = if (fontSize != null) fontSize.sp else 14.sp,
+            fontSize = if (fontSize != null) fontSize.sp else 16.sp,
             color = textColor,
             textAlign = TextAlign.Center
         )
