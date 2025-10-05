@@ -5,6 +5,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -22,28 +24,28 @@ fun HomePage(){
     val viewModel: AppsPreviewListViewModel = viewModel()
     val appsPreviewList = viewModel.appsPreviewList.value
     val appsCategoriesList = viewModel.categoryList.value
-    if (viewModel.isLoading) Text("Loading.......")
-    if (viewModel.error != null) Text(viewModel.error!!)
+    
+    if (viewModel.isLoading) {
+        Text("Loading.......")
+        return
+    }
+    
+    if (viewModel.error != null) {
+        Text(viewModel.error!!)
+        return
+    }
+    
     Column(
         modifier = Modifier
-            .fillMaxSize(),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
+            .fillMaxSize()
+            .padding(16.dp),
+        verticalArrangement = Arrangement.spacedBy(24.dp)
     ) {
-        Button(onClick = { viewModel.fetchAppPreviews() }) {
-            Text("Update previews")
-        }
         for (cat in appsCategoriesList) {
-            Column(
-                modifier = Modifier
-                    .padding(16.dp)
-                    .fillMaxSize(),
-                verticalArrangement = Arrangement.Center,
-                horizontalAlignment = Alignment.CenterHorizontally
-            ) {
-                CategoryList(cat.name,
-                    appsPreviewList.filter{ap -> ap.categoryId == cat.id})
-            }
+            CategoryList(
+                title = cat.name,
+                appPreviewList = appsPreviewList.filter { ap -> ap.categoryId == cat.id }
+            )
         }
     }
 }

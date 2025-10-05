@@ -24,7 +24,10 @@ import com.example.vk_education.R
 import com.example.vk_education.ui.components.DefaultButton
 
 @Composable
-fun OnboardingPage(modifier: Modifier = Modifier) {
+fun OnboardingPage(
+    modifier: Modifier = Modifier,
+    onClick: () -> Unit = {}
+) {
     Box(
         modifier = modifier.fillMaxSize(),
         contentAlignment = Alignment.TopCenter
@@ -58,7 +61,7 @@ fun OnboardingPage(modifier: Modifier = Modifier) {
             )
             Spacer(modifier = Modifier.height(24.dp))
             DefaultButton(
-                onClick = { /* TODO: Add action */ },
+                onClick = onClick,
                 text = "Продолжить",
                 width = 200,
                 height = 48

@@ -7,6 +7,7 @@ import com.example.vk_education.data.models.AppInfo
 import com.example.vk_education.ui.pages.application.ApplicationPage
 import com.example.vk_education.ui.pages.application.ApplicationPageProps
 import com.example.vk_education.ui.pages.home.HomePage
+import com.example.vk_education.ui.pages.onboarding.OnboardingPage
 
 sealed interface PageProps
 data class ApplicationPagePropsValue(val value: ApplicationPageProps): PageProps
@@ -19,6 +20,7 @@ class AppDestination(val route: String, val pageCall: @Composable (options: Page
     }
 }
 
+val Onboarding = AppDestination("Onboarding", {OnboardingPage()})
 val Home = AppDestination("Home", {HomePage()})
 
 
