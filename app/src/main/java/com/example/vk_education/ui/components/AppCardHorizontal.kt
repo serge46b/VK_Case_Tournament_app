@@ -60,11 +60,10 @@ fun AppCardHorizontal(
             )
             
             Spacer(modifier = Modifier.width(12.dp))
-            
             // App Info
             Column(
                 modifier = Modifier.weight(1f),
-                verticalArrangement = Arrangement.Center
+                //verticalArrangement = Arrangement.Center
             ) {
                 // App Name
                 Text(
@@ -86,7 +85,8 @@ fun AppCardHorizontal(
                     color = Color.Black,
                     maxLines = 1
                 )
-                Spacer(modifier = Modifier.height(4.dp))
+                Spacer(modifier = Modifier.height(2.dp))
+
                 Row(){
                     Image(
                         painter = painterResource(id = com.example.vk_education.R.drawable.reviewstar),

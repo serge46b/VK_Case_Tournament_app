@@ -1,23 +1,31 @@
 package com.example.vk_education.ui.pages.home
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
+import androidx.compose.runtime.remember
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.vk_education.ui.components.AppCardBig
+import com.example.vk_education.ui.components.AppCardVertical
+import com.example.vk_education.ui.components.BestList
 import com.example.vk_education.ui.components.CategoryList
 import com.example.vk_education.ui.components.SearchBar
+import com.example.vk_education.ui.viewmodels.AppInfoViewModel
 import com.example.vk_education.ui.viewmodels.AppsPreviewListViewModel
 
 
@@ -26,7 +34,13 @@ fun HomePage(onAppClick: (Int)->Unit) {
     val viewModel: AppsPreviewListViewModel = viewModel()
     val appsPreviewList = viewModel.appsPreviewList.value
     val appsCategoriesList = viewModel.categoryList.value
-    val topData = appsPreviewList.find { ap -> ap.id == 1 }
+    val featuredApps = viewModel.featuredAppsPreviewList.value
+    val viewModelApp: AppInfoViewModel = viewModel()
+    LaunchedEffect(1) {
+        viewModelApp.fetchAppData(1)
+        viewModel.fetchFeaturedAppPreviews()
+    }
+    val topData = viewModelApp.appInfo.value
 
     if (viewModel.isLoading) {
         Text("Loading.......")
@@ -45,15 +59,22 @@ fun HomePage(onAppClick: (Int)->Unit) {
         verticalArrangement = Arrangement.spacedBy(24.dp)
     ) {
         SearchBar()
-        if (topData != null) AppCardBig(
-            topData.name,
-            topData.company,
-            topData.iconUrl,
-            topData.headerImageUrl,
-            topData.rating,
-            topData.ageRating,
-            onClick = {onAppClick(topData.id)})
-//        TODO: Add featured apps
+        
+        if (topData != null) {
+            AppCardBig(
+                topData.name,
+                topData.company,
+                topData.iconUrl,
+                topData.headerImageUrl,
+                topData.apkUrl,
+                topData.rating,
+                topData.ageRating,
+                onClick = {onAppClick(topData.id)}
+            )
+        }
+        
+        BestList(featuredApps, onAppClick = onAppClick)
+        
         for (cat in appsCategoriesList) {
             CategoryList(
                 title = cat.name,

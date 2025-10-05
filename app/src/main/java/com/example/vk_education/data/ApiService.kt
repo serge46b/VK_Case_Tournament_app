@@ -24,4 +24,7 @@ interface ApiService{
 
     @GET("apps/{id}")
     suspend fun getAppInfoById(@Path("id") appId:Int): AppInfo
+
+    @GET("apps/featured")
+    suspend fun getFeaturedApps(): List<AppPreview>
 }
