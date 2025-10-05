@@ -59,7 +59,7 @@ fun AppCardHorizontal(
                     .clip(RoundedCornerShape(8.dp))
             )
             
-            Spacer(modifier = Modifier.width(8.dp))
+            Spacer(modifier = Modifier.width(12.dp))
             
             // App Info
             Column(
@@ -71,7 +71,7 @@ fun AppCardHorizontal(
                     text = appName,
                     fontFamily = FontFamily.Default,
                     fontWeight = FontWeight.Normal,
-                    fontSize = 12.sp,
+                    fontSize = 14.sp,
                     color = Color.Black,
                     maxLines = 1
                 )
@@ -82,7 +82,7 @@ fun AppCardHorizontal(
                     text = appDescription,
                     fontFamily = FontFamily.Default,
                     fontWeight = FontWeight.Light,
-                    fontSize = 8.sp,
+                    fontSize = 10.sp,
                     color = Color.Black,
                     maxLines = 1
                 )
@@ -98,7 +98,7 @@ fun AppCardHorizontal(
                         text = rating.toString(),
                         fontFamily = FontFamily.Default,
                         fontWeight = FontWeight.Light,
-                        fontSize = 8.sp,
+                        fontSize = 10.sp,
                         color = Color.Black,
                         maxLines = 1
                     )

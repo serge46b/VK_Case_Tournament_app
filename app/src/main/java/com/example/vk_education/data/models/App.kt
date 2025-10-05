@@ -12,7 +12,7 @@ data class AppInfo(
     @SerializedName("category_id") val categoryId: Int,
     @SerializedName("age_rating") val ageRating: String,
     @SerializedName("apk_url") val apkUrl: String,
-    @SerializedName("file_size") val fileSize: Int,
+    @SerializedName("file_size") val fileSize: Double,
     @SerializedName("downloads") val downloads: String,
     @SerializedName("rating") val rating: Double,
     @SerializedName("id") val id: Int,

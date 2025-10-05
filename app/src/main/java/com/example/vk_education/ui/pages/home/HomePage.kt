@@ -21,7 +21,9 @@ import com.example.vk_education.ui.viewmodels.AppsPreviewListViewModel
 
 
 @Composable
-fun HomePage(onAppClick: (Int)->Unit) {
+fun HomePage(
+    onAppClick: (Int) -> Unit = {}
+){
     val viewModel: AppsPreviewListViewModel = viewModel()
     val appsPreviewList = viewModel.appsPreviewList.value
     val appsCategoriesList = viewModel.categoryList.value
@@ -56,7 +58,7 @@ fun HomePage(onAppClick: (Int)->Unit) {
             CategoryList(
                 title = cat.name,
                 appPreviewList = appsPreviewList.filter { ap -> ap.categoryId == cat.id },
-                onAppClick
+                onAppClick = onAppClick
             )
         }
     }

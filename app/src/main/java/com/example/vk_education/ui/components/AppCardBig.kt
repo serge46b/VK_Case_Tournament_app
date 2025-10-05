@@ -97,7 +97,7 @@ fun AppCardBig(
                         text = appName,
                         fontFamily = FontFamily.Default,
                         fontWeight = FontWeight.Medium,
-                        fontSize = 10.sp,
+                        fontSize = 12.sp,
                         color = Color.Black,
                         maxLines = 1
                     )
@@ -106,7 +106,7 @@ fun AppCardBig(
                         text = publisher,
                         fontFamily = FontFamily.Default,
                         fontWeight = FontWeight.Light,
-                        fontSize = 8.sp,
+                        fontSize = 10.sp,
                         color = Color.Gray,
                         maxLines = 1
                     )
@@ -128,7 +128,7 @@ fun AppCardBig(
                                 text = rating.toString(),
                                 fontFamily = FontFamily.Default,
                                 fontWeight = FontWeight.Light,
-                                fontSize = 8.sp,
+                                fontSize = 10.sp,
                                 color = Color.Black,
                                 maxLines = 1
                             )
@@ -139,7 +139,7 @@ fun AppCardBig(
                         // Vertical bar separator
                         Text(
                             text = "|",
-                            fontSize = 8.sp,
+                            fontSize = 10.sp,
                             color = Color(0xFFD9D9D9),
                             fontWeight = FontWeight.Normal
                         )
@@ -150,7 +150,7 @@ fun AppCardBig(
                             text = ageRating,
                             fontFamily = FontFamily.Default,
                             fontWeight = FontWeight.Light,
-                            fontSize = 8.sp,
+                            fontSize = 10.sp,
                             color = Color.Black,
                         )
                     }

@@ -47,7 +47,7 @@ fun OnboardingPage(
                 text = "Это - твой новый магазин приложений для Android",
                 fontFamily = FontFamily.Default,
                 fontWeight = FontWeight.Medium,
-                fontSize = 20.sp,
+                fontSize = 22.sp,
                 textAlign = TextAlign.Center
 
             )
@@ -56,7 +56,7 @@ fun OnboardingPage(
                 text = "~ Красивая фразочка ~",
                 fontFamily = FontFamily.Default,
                 fontWeight = FontWeight.Light,
-                fontSize = 14.sp,
+                fontSize = 16.sp,
                 textAlign = TextAlign.Center
             )
             Spacer(modifier = Modifier.height(24.dp))

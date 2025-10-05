@@ -1,6 +1,8 @@
 package com.example.vk_education.ui.pages.application
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -9,7 +11,7 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
-import coil.compose.AsyncImage
+import com.example.vk_education.ui.components.AppHeader
 import com.example.vk_education.ui.viewmodels.AppInfoViewModel
 
 
@@ -27,10 +29,37 @@ fun ApplicationPage(props: ApplicationPageProps) {
         }
     )
     val appInfo = viewModel.appInfo.value
-    Column {
-        Text("Heeeyyyy~ ${props.appId} || ${viewModel.appId}", Modifier.padding(10.dp, 10.dp))
-        if (viewModel.isLoading) Text("Loading...")
-        else if (viewModel.error != null) Text(viewModel.error!!)
-        else AsyncImage(model = "http://auth.mofius-server.ru${appInfo!!.iconUrl}", contentDescription = null)
+    
+    if (viewModel.isLoading) {
+        Text("Loading...")
+        return
+    }
+    
+    if (viewModel.error != null) {
+        Text("Error: ${viewModel.error}")
+        return
+    }
+    
+    if (appInfo == null) {
+        Text("No app information available")
+        return
+    }
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize(),
+            //.padding(24.dp),
+    ) {
+        AppHeader(
+            appName = appInfo.name,
+            publisher = appInfo.company,
+            appIcon = appInfo.iconUrl,
+            appHeader = appInfo.headerImageUrl,
+            rating = appInfo.rating,
+            ageRating = appInfo.ageRating,
+            downloads = appInfo.downloads,
+            size = appInfo.fileSize,
+            onClick = { /* Handle download action */ }
+        )
     }
 }

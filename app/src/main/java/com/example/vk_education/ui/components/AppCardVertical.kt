@@ -61,7 +61,7 @@ fun AppCardVertical(
                 text = appName,
                 fontFamily = FontFamily.Default,
                 fontWeight = FontWeight.Normal,
-                fontSize = 8.sp,
+                fontSize = 10.sp,
                 textAlign = TextAlign.Left,
                 color = Color.Black,
                 maxLines = 2
