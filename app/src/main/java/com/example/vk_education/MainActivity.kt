@@ -20,6 +20,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import com.example.vk_education.ui.pages.application.ApplicationPageProps
 import com.example.vk_education.ui.theme.VK_EducationTheme
 
+
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,7 +41,7 @@ private fun App() {
                 Button(onClick = { currentPage = Home }) { Text("1") }
                 Button(onClick = {
                     Application.options = ApplicationPagePropsValue(object : ApplicationPageProps {
-                        override val appId: Int = 1
+                        override val appId: Int = 2
                     })
                     currentPage = Application
                 }) { Text("2") }
