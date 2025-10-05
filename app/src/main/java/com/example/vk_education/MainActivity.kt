@@ -1,47 +1,95 @@
 package com.example.vk_education
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import android.content.Context
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
+import com.example.vk_education.ui.pages.application.ApplicationPage
+import com.example.vk_education.ui.pages.home.HomePage
+import com.example.vk_education.ui.pages.onboarding.OnboardingPage
 import com.example.vk_education.ui.theme.VK_EducationTheme
+import com.example.vk_education.utils.OnboardingUtils
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         setContent {
-            VK_EducationTheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "Android",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
-            }
+            App()
         }
     }
 }
 
+@Preview
 @Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
+private fun App() {
     VK_EducationTheme {
-        Greeting("Android")
+        val context = LocalContext.current
+        var currentPage: AppDestination by remember { mutableStateOf(Onboarding) }
+        var previousPage: AppDestination? by remember { mutableStateOf<AppDestination?>(null) }
+        var selectedAppId: Int? by remember { mutableStateOf<Int?>(null) }
+
+
+        val goBack = {
+            if (previousPage != null) {
+                currentPage = previousPage!!
+                previousPage = null
+            }
+        }
+        var isInitialized by remember { mutableStateOf(false) }
+
+        // Check onboarding state on app start
+        LaunchedEffect(Unit) {
+            val hasSeenOnboarding = OnboardingUtils.hasOnboardingBeenShown(context)
+            if (hasSeenOnboarding) {
+                currentPage = Home
+            }
+            isInitialized = true
+        }
+
+        if (!isInitialized) {
+            // Show loading or splash screen while checking state
+            return@VK_EducationTheme
+        }
+
+        Box(modifier = Modifier.fillMaxSize()) {
+            when (currentPage) {
+                Onboarding -> {
+                    OnboardingPage(
+                        onClick = {
+                            OnboardingUtils.setOnboardingShown(context)
+                            currentPage = Home
+                        }
+                    )
+                }
+
+                Home -> {
+                    HomePage(onAppClick = { id ->
+                        selectedAppId = id
+                        currentPage = Application
+                        previousPage = Home
+
+                    })
+                }
+
+                Application -> {
+                    ApplicationPage(selectedAppId!!, goBack)
+                }
+            }
+        }
     }
 }
