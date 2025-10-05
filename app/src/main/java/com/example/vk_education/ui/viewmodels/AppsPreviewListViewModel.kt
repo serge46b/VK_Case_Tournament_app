@@ -10,6 +10,7 @@ import kotlinx.coroutines.launch
 
 class AppsPreviewListViewModel: ViewModel(){
     val appsPreviewList = mutableStateOf<List<AppPreview>>(emptyList())
+    val featuredAppsPreviewList = mutableStateOf<List<AppPreview>>(emptyList())
     val categoryList = mutableStateOf<List<Category>>(emptyList())
     private val _isLoading = mutableStateOf<Boolean>(false)
     private val _error = mutableStateOf<String?>(null)
@@ -28,6 +29,20 @@ class AppsPreviewListViewModel: ViewModel(){
                 appsPreviewList.value = response
                 val catResponse = ApiClient.apiService.getAllCategories()
                 categoryList.value = catResponse
+            }catch (e: Exception){
+                _error.value = e.message
+            }
+            _isLoading.value = false
+        }
+    }
+    fun fetchFeaturedAppPreviews(){
+        viewModelScope.launch {
+            _isLoading.value = true
+            _error.value = null
+            featuredAppsPreviewList.value = emptyList<AppPreview>()
+            try{
+                val response = ApiClient.apiService.getFeaturedApps()
+                featuredAppsPreviewList.value = response
             }catch (e: Exception){
                 _error.value = e.message
             }
