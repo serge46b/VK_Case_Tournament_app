@@ -42,7 +42,7 @@ fun HomePage(
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .padding(24.dp).padding(top=50.dp),
+            .padding(start = 24.dp, top = 50.dp),
         verticalArrangement = Arrangement.spacedBy(24.dp)
     ) {
         if (topData != null) AppCardBig(
