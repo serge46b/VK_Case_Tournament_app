@@ -9,5 +9,6 @@ data class AppPreview(
     @SerializedName("icon_url") val iconUrl: String,
     @SerializedName("header_image_url") val headerImageUrl: String,
     @SerializedName("category_id") val categoryId: Int,
-    @SerializedName("age_rating") val ageRating: String
+    @SerializedName("age_rating") val ageRating: String,
+    @SerializedName("rating") val rating: Float
 )

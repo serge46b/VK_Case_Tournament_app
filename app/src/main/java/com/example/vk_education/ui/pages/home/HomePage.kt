@@ -13,6 +13,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.vk_education.ui.components.CategoryList
 import com.example.vk_education.ui.viewmodels.AppsPreviewListViewModel
 
 
@@ -25,8 +26,7 @@ fun HomePage(){
     if (viewModel.error != null) Text(viewModel.error!!)
     Column(
         modifier = Modifier
-            .fillMaxSize()
-            .padding(16.dp),
+            .fillMaxSize(),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
@@ -37,18 +37,12 @@ fun HomePage(){
             Column(
                 modifier = Modifier
                     .padding(16.dp)
-                    .fillMaxWidth(),
+                    .fillMaxSize(),
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Text(cat.name, modifier = Modifier.align(Alignment.Start))
-                for (cap in appsPreviewList.filter { ap -> ap.categoryId == cat.id }) {
-                    Text(
-                        cap.name,
-                        modifier = Modifier.align(Alignment.End),
-                        color = Color.Red
-                    )
-                }
+                CategoryList(cat.name,
+                    appsPreviewList.filter{ap -> ap.categoryId == cat.id})
             }
         }
     }
