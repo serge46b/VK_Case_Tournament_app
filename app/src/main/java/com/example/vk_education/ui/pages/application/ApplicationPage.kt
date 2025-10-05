@@ -35,16 +35,22 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewmodel.compose.viewModel
 import coil.compose.AsyncImage
 import com.example.vk_education.data.ApiClient
+import com.example.vk_education.data.models.Category
 import com.example.vk_education.ui.components.AppHeader
 import com.example.vk_education.ui.components.ReviewsSection
 import com.example.vk_education.ui.viewmodels.AppInfoViewModel
+import com.example.vk_education.ui.viewmodels.AppsPreviewListViewModel
 
 
 @Composable
 fun ApplicationPage(appId: Int, goBack:()->Unit) {
     val viewModel: AppInfoViewModel = viewModel()
+    val viewModelCat: AppsPreviewListViewModel = viewModel()
+    val appsCategoriesList = viewModelCat.categoryList.value
+
     LaunchedEffect(appId) {
         viewModel.fetchAppData(appId)
+        viewModelCat.fetchAppPreviews()
     }
     val appInfo = viewModel.appInfo.value
     val goBackInternal = {
@@ -82,11 +88,12 @@ fun ApplicationPage(appId: Int, goBack:()->Unit) {
                     publisher = appInfo.company,
                     appIcon = appInfo.iconUrl,
                     appHeader = appInfo.headerImageUrl,
+                    apkUrl = appInfo.apkUrl,
                     rating = appInfo.rating,
+                    category = appsCategoriesList.find { c->c.id==appInfo.categoryId }?.name?:"Неизвестно",
                     ageRating = appInfo.ageRating,
                     downloads = appInfo.downloads,
                     size = appInfo.fileSize,
-                    onClick = { /* Handle download action */ }
                 )
 
                 Spacer(modifier = Modifier.height(8.dp))

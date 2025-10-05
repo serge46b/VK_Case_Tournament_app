@@ -3,7 +3,6 @@ package com.example.vk_education.utils
 import android.content.Context
 import android.net.Uri
 import android.util.Log
-import androidx.compose.ui.platform.LocalContext
 import androidx.core.net.toUri
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -129,6 +128,17 @@ class APKInstall(private val context: Context) {
 }
 
 class APKInstallViewModel(val apkInstaller: APKInstall) : ViewModel() {
+
+    fun downloadAPKAsync(
+        apkUri: String,
+        onProgress: (Long, Long, Int) -> Unit,
+        onComplete: (Boolean) -> Unit
+    ){
+        viewModelScope.launch {
+            val file = apkInstaller.downloadApk(apkUri, "tmp.apk", { c, m -> onProgress(c, m, 0) })
+            if (file !== null) onComplete(true)
+        }
+    }
     fun installAPKAsync(
         apkUri: String,
         onProgress: (Long, Long, Int) -> Unit,

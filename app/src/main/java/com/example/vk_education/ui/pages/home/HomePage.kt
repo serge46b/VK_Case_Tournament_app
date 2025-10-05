@@ -10,6 +10,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.material3.Button
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -18,6 +19,7 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.vk_education.ui.components.AppCardBig
 import com.example.vk_education.ui.components.CategoryList
 import com.example.vk_education.ui.components.SearchBar
+import com.example.vk_education.ui.viewmodels.AppInfoViewModel
 import com.example.vk_education.ui.viewmodels.AppsPreviewListViewModel
 
 
@@ -26,7 +28,11 @@ fun HomePage(onAppClick: (Int)->Unit) {
     val viewModel: AppsPreviewListViewModel = viewModel()
     val appsPreviewList = viewModel.appsPreviewList.value
     val appsCategoriesList = viewModel.categoryList.value
-    val topData = appsPreviewList.find { ap -> ap.id == 1 }
+    val viewModelApp: AppInfoViewModel = viewModel()
+    LaunchedEffect(1) {
+        viewModelApp.fetchAppData(1)
+    }
+    val topData = viewModelApp.appInfo.value
 
     if (viewModel.isLoading) {
         Text("Loading.......")
@@ -50,6 +56,7 @@ fun HomePage(onAppClick: (Int)->Unit) {
             topData.company,
             topData.iconUrl,
             topData.headerImageUrl,
+            topData.apkUrl,
             topData.rating,
             topData.ageRating,
             onClick = {onAppClick(topData.id)})
