@@ -7,16 +7,13 @@ import com.example.vk_education.data.ApiClient
 import com.example.vk_education.data.models.AppInfo
 import kotlinx.coroutines.launch
 
-class AppInfoViewModel(var appId: Int): ViewModel() {
+class AppInfoViewModel: ViewModel() {
     val appInfo = mutableStateOf<AppInfo?>(null)
     private val _isLoading = mutableStateOf<Boolean>(false)
     private val _error = mutableStateOf<String?>(null)
 
-    init {
-        fetchAppData()
-    }
 
-    fun fetchAppData(){
+    fun fetchAppData(appId:Int){
 
         viewModelScope.launch {
             _isLoading.value = true
@@ -30,6 +27,9 @@ class AppInfoViewModel(var appId: Int): ViewModel() {
             }
             _isLoading.value = false
         }
+    }
+    fun clear(){
+        appInfo.value = null
     }
 
     val isLoading: Boolean

@@ -5,12 +5,10 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import com.example.vk_education.data.models.AppInfo
 import com.example.vk_education.ui.pages.application.ApplicationPage
-import com.example.vk_education.ui.pages.application.ApplicationPageProps
 import com.example.vk_education.ui.pages.home.HomePage
 import com.example.vk_education.ui.pages.onboarding.OnboardingPage
 
 sealed interface PageProps
-data class ApplicationPagePropsValue(val value: ApplicationPageProps) : PageProps
 
 
 class AppDestination(val route: String, val pageCall: @Composable (options: PageProps?) -> Unit) {
@@ -26,10 +24,7 @@ val Onboarding = AppDestination("Onboarding", { OnboardingPage() })
 val Home = AppDestination("Home", {HomePage(onAppClick = {})})
 
 
-val Application = AppDestination("Application", pageCall = { o ->
-    if (o == null || o !is ApplicationPagePropsValue) throw Exception("Application page should receive appId through options. Make sure that you set options correctly before composing")
-    else ApplicationPage(o.value)
-})
+val Application = AppDestination("Application", pageCall = {ApplicationPage(0, {})})
 
 //interface AppDestination{
 //    val route: String
